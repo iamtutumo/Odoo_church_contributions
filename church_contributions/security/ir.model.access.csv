@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_church_member_portal,access_church_member_portal,model_church_member,base.group_portal,1,0,0,0
+access_church_payment_portal,access_church_payment_portal,model_church_payment,base.group_portal,1,0,0,0
+access_church_subparish_portal,access_church_subparish_portal,model_church_subparish,base.group_portal,1,0,0,0
+access_church_parish_portal,access_church_parish_portal,model_church_parish,base.group_portal,1,0,0,0
+access_church_archdeaconry_portal,access_church_archdeaconry_portal,model_church_archdeaconry,base.group_portal,1,0,0,0
+access_church_diocese_portal,access_church_diocese_portal,model_church_diocese,base.group_portal,1,0,0,0

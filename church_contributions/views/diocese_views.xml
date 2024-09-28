@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_diocese_form" model="ir.ui.view">
+        <field name="name">church.diocese.form</field>
+        <field name="model">church.diocese</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="region"/>
+                        <field name="description"/>
+                        <field name="gps_coordinates"/>
+                        <field name="total_contributions"/>
+                    </group>
+                    <notebook>
+                        <page string="Archdeaconries">
+                            <field name="archdeaconry_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_diocese_tree" model="ir.ui.view">
+        <field name="name">church.diocese.tree</field>
+        <field name="model">church.diocese</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="region"/>
+                <field name="total_contributions"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_diocese_search" model="ir.ui.view">
+        <field name="name">church.diocese.search</field>
+        <field name="model">church.diocese</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="region"/>
+                <group expand="0" string="Group By">
+                    <filter string="Region" name="group_by_region" context="{'group_by': 'region'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_diocese" model="ir.actions.act_window">
+        <field name="name">Dioceses</field>
+        <field name="res_model">church.diocese</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_diocese_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first diocese!
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_diocese"
+              name="Dioceses"
+              parent="menu_church_root"
+              action="action_diocese"
+              sequence="10"/>
+</odoo>

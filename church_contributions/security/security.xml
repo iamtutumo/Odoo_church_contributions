@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Security Groups -->
+        <record id="group_church_admin" model="res.groups">
+            <field name="name">Church Admin</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="group_church_user" model="res.groups">
+            <field name="name">Church User</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <!-- Record Rules -->
+        <!-- Diocese Rule -->
+        <record id="rule_diocese_admin" model="ir.rule">
+            <field name="name">Diocese: Admin Access</field>
+            <field name="model_id" ref="model_church_diocese"/>
+            <field name="groups" eval="[(4, ref('group_church_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- Archdeaconry Rule -->
+        <record id="rule_archdeaconry_admin" model="ir.rule">
+            <field name="name">Archdeaconry: Admin Access</field>
+            <field name="model_id" ref="model_church_archdeaconry"/>
+            <field name="groups" eval="[(4, ref('group_church_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- Parish Rule -->
+        <record id="rule_parish_admin" model="ir.rule">
+            <field name="name">Parish: Admin Access</field>
+            <field name="model_id" ref="model_church_parish"/>
+            <field name="groups" eval="[(4, ref('group_church_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- Sub-Parish Rule -->
+        <record id="rule_subparish_admin" model="ir.rule">
+            <field name="name">Sub-Parish: Admin Access</field>
+            <field name="model_id" ref="model_church_subparish"/>
+            <field name="groups" eval="[(4, ref('group_church_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- Member Rule -->
+        <record id="rule_member_user" model="ir.rule">
+            <field name="name">Member: User Access</field>
+            <field name="model_id" ref="model_church_member"/>
+            <field name="groups" eval="[(4, ref('group_church_user'))]"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        </record>
+
+        <record id="rule_member_admin" model="ir.rule">
+            <field name="name">Member: Admin Access</field>
+            <field name="model_id" ref="model_church_member"/>
+            <field name="groups" eval="[(4, ref('group_church_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+
+        <!-- Payment Rule -->
+        <record id="rule_payment_user" model="ir.rule">
+            <field name="name">Payment: User Access</field>
+            <field name="model_id" ref="model_church_payment"/>
+            <field name="groups" eval="[(4, ref('group_church_user'))]"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        </record>
+
+        <record id="rule_payment_admin" model="ir.rule">
+            <field name="name">Payment: Admin Access</field>
+            <field name="model_id" ref="model_church_payment"/>
+            <field name="groups" eval="[(4, ref('group_church_admin'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+        </record>
+    </data>
+</odoo>

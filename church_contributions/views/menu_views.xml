@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main menu item -->
+    <menuitem id="menu_church_root" name="Church Contributions" sequence="10"/>
+
+    <!-- Diocese menu -->
+    <menuitem id="menu_diocese" name="Dioceses" parent="menu_church_root" action="action_diocese" sequence="10"/>
+
+    <!-- Archdeaconry menu -->
+    <menuitem id="menu_archdeaconry" name="Archdeaconries" parent="menu_church_root" action="action_archdeaconry" sequence="20"/>
+
+    <!-- Parish menu -->
+    <menuitem id="menu_parish" name="Parishes" parent="menu_church_root" action="action_parish" sequence="30"/>
+
+    <!-- Sub-Parish menu -->
+    <menuitem id="menu_subparish" name="Sub-Parishes" parent="menu_church_root" action="action_subparish" sequence="40"/>
+
+    <!-- Member menu -->
+    <menuitem id="menu_member" name="Members" parent="menu_church_root" action="action_member" sequence="50"/>
+
+    <!-- Payment menu -->
+    <menuitem id="menu_payment" name="Payments" parent="menu_church_root" action="action_payment" sequence="60"/>
+</odoo>

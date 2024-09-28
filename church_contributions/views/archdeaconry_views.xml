@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_archdeaconry_form" model="ir.ui.view">
+        <field name="name">church.archdeaconry.form</field>
+        <field name="model">church.archdeaconry</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="region"/>
+                        <field name="diocese_id"/>
+                        <field name="description"/>
+                        <field name="gps_coordinates"/>
+                        <field name="total_contributions"/>
+                    </group>
+                    <notebook>
+                        <page string="Parishes">
+                            <field name="parish_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_archdeaconry_tree" model="ir.ui.view">
+        <field name="name">church.archdeaconry.tree</field>
+        <field name="model">church.archdeaconry</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="region"/>
+                <field name="diocese_id"/>
+                <field name="total_contributions"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_archdeaconry_search" model="ir.ui.view">
+        <field name="name">church.archdeaconry.search</field>
+        <field name="model">church.archdeaconry</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="region"/>
+                <field name="diocese_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Diocese" name="group_by_diocese" context="{'group_by': 'diocese_id'}"/>
+                    <filter string="Region" name="group_by_region" context="{'group_by': 'region'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_archdeaconry" model="ir.actions.act_window">
+        <field name="name">Archdeaconries</field>
+        <field name="res_model">church.archdeaconry</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_archdeaconry_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first archdeaconry!
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_archdeaconry"
+              name="Archdeaconries"
+              parent="menu_church_root"
+              action="action_archdeaconry"
+              sequence="20"/>
+</odoo>

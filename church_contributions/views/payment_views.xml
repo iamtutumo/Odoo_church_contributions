@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Payment Action -->
+    <record id="action_payment" model="ir.actions.act_window">
+        <field name="name">Payments</field>
+        <field name="res_model">church.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Payment Tree View -->
+    <record id="view_payment_tree" model="ir.ui.view">
+        <field name="name">church.payment.tree</field>
+        <field name="model">church.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <!-- Add other fields you want to display in the tree view -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Payment Form View -->
+    <record id="view_payment_form" model="ir.ui.view">
+        <field name="name">church.payment.form</field>
+        <field name="model">church.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <!-- Add other fields you want to display in the form view -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

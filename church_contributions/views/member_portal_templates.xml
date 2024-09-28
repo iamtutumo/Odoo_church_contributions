@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_church" name="Portal layout : church menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'member' or member" t-attf-class="breadcrumb-item #{'active ' if not member else ''}">
+                <a t-if="member" t-attf-href="/my/member/#{member.id}">Member</a>
+                <t t-else="">Member</t>
+            </li>
+            <li t-if="page_name == 'payment' or payment" t-attf-class="breadcrumb-item #{'active ' if not payment else ''}">
+                <a t-if="payment" t-attf-href="/my/payments?{{ keep_query() }}">Payments</a>
+                <t t-else="">Payments</t>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_church" name="Portal My Home : church entries" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Payments</t>
+                <t t-set="url" t-value="'/my/payments'"/>
+                <t t-set="placeholder_count" t-value="'payment_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_member" name="My Member">
+        <t t-call="portal.portal_layout">
+            <t t-set="member_sudo" t-value="member.sudo()"/>
+            <div class="row mt16">
+                <div class="col-lg-8">
+                    <h3>Member Information</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p><strong>Name:</strong> <span t-field="member_sudo.name"/></p>
+                            <p><strong>Email:</strong> <span t-field="member_sudo.email"/></p>
+                            <p><strong>Phone:</strong> <span t-field="member_sudo.phone"/></p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p><strong>Sub-Parish:</strong> <span t-field="member_sudo.subparish_id.name"/></p>
+                            <p><strong>Parish:</strong> <span t-field="member_sudo.parish_id.name"/></p>
+                            <p><strong>Diocese:</strong> <span t-field="member_sudo.diocese_id.name"/></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_my_payments" name="My Payments">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Payments</t>
+            </t>
+            <t t-if="not payments">
+                <p>There are currently no payments for your account.</p>
+            </t>
+            <t t-if="payments" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Payment Date</th>
+                        <th>Amount</th>
+                        <th>Payment Channel</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="payments" t-as="payment">
+                        <tr>
+                            <td><span t-field="payment.payment_date"/></td>
+                            <td><span t-field="payment.amount"/></td>
+                            <td><span t-field="payment.payment_channel"/></td>
+                            <td><span t-field="payment.payment_status"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_member_form" model="ir.ui.view">
+        <field name="name">church.member.form</field>
+        <field name="model">church.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_create_portal_user" string="Create Portal User" type="object" class="oe_highlight" invisible="user_id"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="date_of_birth"/>
+                            <field name="gender"/>
+                        </group>
+                        <group>
+                            <field name="subparish_id"/>
+                            <field name="parish_id"/>
+                            <field name="archdeaconry_id"/>
+                            <field name="diocese_id"/>
+                            <field name="total_contributions"/>
+                            <field name="user_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Payments">
+                            <field name="payment_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_member_tree" model="ir.ui.view">
+        <field name="name">church.member.tree</field>
+        <field name="model">church.member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="subparish_id"/>
+                <field name="total_contributions"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_member_search" model="ir.ui.view">
+        <field name="name">church.member.search</field>
+        <field name="model">church.member</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="subparish_id"/>
+                <field name="parish_id"/>
+                <field name="archdeaconry_id"/>
+                <field name="diocese_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Sub-Parish" name="group_by_subparish" context="{'group_by': 'subparish_id'}"/>
+                    <filter string="Parish" name="group_by_parish" context="{'group_by': 'parish_id'}"/>
+                    <filter string="Archdeaconry" name="group_by_archdeaconry" context="{'group_by': 'archdeaconry_id'}"/>
+                    <filter string="Diocese" name="group_by_diocese" context="{'group_by': 'diocese_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_member" model="ir.actions.act_window">
+        <field name="name">Members</field>
+        <field name="res_model">church.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_member_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first church member!
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_member"
+              name="Members"
+              parent="menu_church_root"
+              action="action_member"
+              sequence="50"/>
+</odoo>
